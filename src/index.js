@@ -1,10 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import '../node_modules/normalize.css/normalize.css';
+import {Router, Route} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
+import App from './App';
 
-const title = 'Working Setup!';
+const history = createBrowserHistory();
 
 ReactDOM.render(
-	<div>{title}</div>,
+	<Router history={history}>
+		<Route path={'/'} component={App}/>
+	</Router>,
 	document.getElementById('app-react')
 );
 

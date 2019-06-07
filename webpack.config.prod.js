@@ -1,8 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
 	entry: ['./src/index.js'],
@@ -16,19 +14,22 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.(css|scss)$/,
+				test: /\.(sa|sc|c)ss$/,
 				use: [
-					devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+					MiniCssExtractPlugin.loader,
 					{
-						loader: 'style-loader',
+						loader: 'css-loader',
 						options: {
 							sourceMap: true
 						}
 					},
 					{
-						loader: 'css-loader',
+						loader: 'postcss-loader',
 						options: {
-							sourceMap: true
+							plugins: [
+								require('autoprefixer')(),
+								require('cssnano')()
+							]
 						}
 					},
 					{
@@ -54,15 +55,12 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
 		new MiniCssExtractPlugin({
-			filename: '[name].css',
+			filename: 'bundle.css',
 			chunkFilename: '[id].css'
-		}),
-		new OpenBrowserPlugin({url: 'http://localhost:8081'})
+		})
 	],
-	devServer: {
-		contentBase: './dist',
-		hot: true
+	optimization: {
+		minimize: true
 	}
 };
