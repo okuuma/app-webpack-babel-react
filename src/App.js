@@ -1,14 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
+import Quicksearch from './Quicksearch';
 import './css/style.scss'
 
 export default class App extends React.Component {
 
 	render(){
-
+		console.log('REREREr');
 		return (
-			<div className="content">
-				<p>WORKING SETUP!</p>
-			</div>
+			<Quicksearch/>
 		);
 	}
 }

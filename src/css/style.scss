@@ -1,6 +1,9 @@
-div {
-	background : yellowgreen;
-	color      : white;
-	display    : flex;
-	padding    : 1rem;
+@import "base";
+@import "core";
+
+.quickSearchForm {
+	background: rebeccapurple;
+	@include respond-to(min-md){
+		background: cadetblue;
+	}
 }

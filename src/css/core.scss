@@ -1,0 +1,1055 @@
+@import "base";
+@import "icon";
+
+/* ---------------------------------------------------------------------- */
+/* -------------------------------------------------- General Styles */
+
+@at-root {
+
+	html {
+
+		main {
+			height    : 100%;
+			min-width : 320px;
+		}
+	}
+
+	body {
+		font-family : $font-family;
+		font-size   : 10px;
+		height      : 100%;
+		position    : relative;
+
+		> .wrapper {
+			display        : flex;
+			flex-direction : column;
+		}
+	}
+
+	strong {
+		font-weight : bold;
+	}
+
+	button,
+	input[type="button"] {
+		border  : none;
+		outline : 0;
+	}
+}
+
+// Safari Fix! (Safari got default styling, which is never covered by css). They removing certain effects (box-shadow) and adding border-radius.
+textarea,
+select,
+input {
+	border-radius : 0;
+	appearance    : none;
+}
+
+select {
+	padding-right : 3rem;
+}
+
+img {
+	display : block;
+	height  : auto;
+	width   : 100%;
+}
+
+a {
+	display         : block;
+	text-decoration : none;
+
+	&:visited,
+	&:hover,
+	&:focus,
+	&:active,
+	&:visited:hover {
+		outline         : 0;
+		text-decoration : none;
+	}
+}
+
+.heading,
+.headline {
+	text-align : center;
+
+	h1 {
+		font-family : $font-family;
+		font-size   : $font-size--large;
+		font-weight : bold;
+	}
+
+	h2 {
+		color       : $primary;
+		font-family : $font-family;
+		font-size   : $font-size--xlarge;
+		font-weight : $font-weight--bold;
+
+		@include respond-to(min-md) {
+			font-size : $font-size--xxlarge;
+		}
+	}
+}
+
+.subline {
+	color       : $primary;
+	font-family : $font-family;
+	font-size   : $font-size--large;
+	text-align  : center;
+
+	@include respond-to(min-md) {
+		font-weight : $font-weight--bold;
+	}
+}
+
+.text {
+
+	p,
+	span,
+	li,
+	a {
+		color       : $grey--text;
+		font-family : $font-family;
+		font-size   : $font-size--base;
+	}
+}
+
+.button {
+	background  : $secondary;
+	color       : $white;
+	font-weight : bold;
+	height      : 3rem;
+	line-height : 3rem;
+	padding     : 0 2rem;
+	text-align  : center;
+}
+
+.nameBreak {
+	> span {
+		@include respond-to(min-md) {
+			display : block;
+		}
+	}
+}
+
+.primary {
+	color : $primary;
+}
+
+.secondary {
+	color : $secondary;
+}
+
+.mobile {
+	display : block;
+
+	@include respond-to(min-md) {
+		display : none;
+	}
+}
+
+.desktop {
+	display : none;
+
+	@include respond-to(min-md) {
+		display : block;
+	}
+}
+
+.bold {
+	font-weight : $font-weight--bold;
+}
+
+[data-id="loadingAnimation"],
+.animatedButton {
+	background     : url('/core/img/ibeloading.gif') center center no-repeat rgba(255, 255, 255, .9);
+	height         : 100%;
+	left           : 0;
+	pointer-events : none;
+	position       : absolute;
+	top            : 0;
+	width          : 100%;
+	z-index        : 19;
+}
+
+body > [data-id="loadingAnimation"] {
+	position : fixed;
+}
+
+iframe {
+	border : 0;
+}
+
+/* ---------------------------------------- Helper */
+
+@at-root {
+	html {
+
+		.noGutter,
+		.noGutter > [class*="col-"] {
+			margin-left   : 0 !important;
+			margin-right  : 0 !important;;
+			padding-left  : 0 !important;;
+			padding-right : 0 !important;;
+		}
+
+		.noMargin {
+			margin-left  : 0 !important;;
+			margin-right : 0 !important;;
+		}
+
+		.noPadding {
+			padding : 0 !important;;
+		}
+	}
+}
+
+/* ---------------------------------------- Form elements */
+
+input[type="checkbox"],
+input[type="radio"] {
+	background         : $white;
+	border             : 0.1rem solid $grey--checkbox--shadow;
+	border-radius      : 0.6rem;
+	box-shadow         : $box-shadow--form-input-checkboxes;
+	cursor             : pointer;
+	flex-shrink        : 0;
+	height             : 2rem;
+	margin             : 0;
+	width              : 2rem;
+	&:focus {
+		outline : none !important;
+	}
+	&:checked {
+		background-image : $gradient-checkbox-fill;
+	}
+	&:hover {
+		border : 0.1rem solid $primary--lite !important;
+	}
+
+	&:disabled {
+		background   : $grey--checkbox--background;
+		border-color : $grey--checkbox--background;
+		box-shadow   : none;
+		color        : $grey--checkbox--color;
+		cursor       : not-allowed;
+	}
+	-webkit-appearance : none;
+	-moz-appearance    : none;
+	appearance         : none;
+}
+
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+	cursor : pointer;
+}
+
+input[type="radio"] {
+	border-radius : 50%;
+}
+
+.input-group {
+
+	&.time {
+		width : 100%;
+		@include respond-to(min-md) {
+			width : 30%;
+		}
+
+		.input-group-addon {
+			cursor : pointer;
+			width  : 4.5rem;
+
+			.glyphicon-time {
+
+				&:before {
+					content     : $ks-clock-line;
+					font-family : $ks;
+				}
+			}
+		}
+	}
+}
+
+/* ---------------------------------------- Grid */
+
+.footerContainer {
+	display : none;
+}
+
+/*** Slider CSS ***/
+.wkSlider {
+
+	position : relative;
+
+	&__slide--prev,
+	&__slide--next {
+		background    : rgba(255, 255, 255, 0.71);
+		border-radius : 50%;
+		cursor        : pointer;
+		display       : block;
+		font-size     : 2.5rem;
+		height        : 4.2rem;
+		margin-top    : -1.5rem;
+		padding-top   : .6rem;
+		position      : absolute;
+		right         : 0;
+		top           : 50%;
+		width         : 4.2rem;
+		@include respond-to(min-md) {
+			border-radius : 50%;
+			font-size     : 1.4rem;
+			height        : 30px;
+			padding-top   : .6rem;
+			width         : 3rem;
+
+			@include respond-to(min-lg) {
+				background    : rgba(255, 255, 255, 0);
+				border-radius : 0;
+				font-size     : 4rem;
+				height        : 4rem;
+				padding-top   : 0;
+				width         : 4rem;
+
+				i {
+					position : absolute;
+				}
+			}
+		}
+
+		i {
+			color : $grey--text;
+		}
+	}
+
+	&__slide--prev {
+		left         : 1rem;
+		padding-left : .8rem;
+		z-index      : 1;
+		@include respond-to(min-md) {
+			left         : 0;
+			padding-left : 1.4rem;
+
+			@include respond-to(min-lg) {
+				left         : -2.5rem;
+				padding-left : 0;
+			}
+		}
+	}
+
+	&__slide--next {
+		padding-left : .9rem;
+		right        : 1rem;
+		z-index      : 1;
+		@include respond-to(min-md) {
+			padding-left : .2rem;
+			right        : 0;
+
+			@include respond-to(min-lg) {
+				padding-left : 0;
+				right        : -2.5rem;
+			}
+		}
+	}
+
+	.wkElement {
+		@include respond-to(max-md) {
+			width : 100vw;
+
+			@include respond-to(image) {
+				height : 41.5rem;
+				width  : 46.3rem;
+			}
+		}
+	}
+}
+
+.slick-slider .swiper-slide {
+	&:active,
+	&:focus {
+		outline : 0;
+	}
+}
+
+/*** Slider CSS end ***/
+
+/* wkElements Breakpoint dimensions */
+.gridRow,
+.gridSlider {
+	margin    : 0 auto;
+	max-width : 46.3rem;
+
+	/* grid content max-width + margin-left + margin-right */
+	@include respond-to(min-md) {
+		max-width : 73.2rem;
+	}
+	@include respond-to(min-lg) {
+		max-width : 94.2rem;
+	}
+	@include respond-to(legacy) {
+		max-width : 97.5rem;
+	}
+	@include respond-to(laptop) {
+		max-width : 129.9rem;
+	}
+}
+
+.gridSlider.slick-slider {
+	margin-bottom : 0;
+}
+
+.gridRow:before,
+.gridRow:after,
+.gridSlider:before,
+.gridSlider:after {
+	clear   : both;
+	content : " ";
+	display : table;
+}
+
+.wkElement {
+	float      : left;
+	min-height : 1px;
+	position   : relative;
+	width      : 100%;
+}
+
+.wk1, .wk2, .wk3 {
+
+	// ~ Seitenverhältnis 320x287
+	height        : 89.6875vw;
+
+	margin-bottom : 1.3rem;
+	margin-top    : 1.3rem;
+
+	@include respond-to(image) {
+		height : 41.5rem;
+		width  : 46.3rem;
+	}
+
+	/*@include respond-to(min-sm) {
+		height : 415px;
+		width  : 463px;
+	}*/
+
+	@include respond-to(min-md) {
+		height : 19.1rem;
+		margin : 1.5rem;
+		width  : 21.4rem;
+	}
+	@include respond-to(min-lg) {
+		height : 24.7rem;
+		margin : 1.9rem;
+		width  : 276px;
+	}
+	@include respond-to(legacy) {
+		height : 25.5rem;
+		margin : 2rem;
+		width  : 28.5rem;
+	}
+	@include respond-to(laptop) {
+		height : 34rem;
+		margin : 2.65rem;
+		width  : 38rem;
+	}
+
+	&.isCMS {
+		@include respond-to(image) {
+			height : 41.5rem;
+			width  : 46.3rem !important;;
+		}
+
+		@include respond-to(min-md) {
+			height : 19.1rem;
+			margin : 1.5rem;
+			width  : 21.4rem !important;;
+		}
+		@include respond-to(min-lg) {
+			height : 24.7rem;
+			margin : 1.9rem;
+			width  : 276px !important;;
+		}
+		@include respond-to(legacy) {
+			height : 25.5rem;
+			margin : 2rem;
+			width  : 28.5rem !important;;
+		}
+		@include respond-to(laptop) {
+			height : 34rem;
+			margin : 2.65rem;
+			width  : 38rem !important;;
+		}
+	}
+}
+
+.wk2 {
+	@include respond-to(min-md) {
+		width : 45.8rem;
+	}
+	@include respond-to(min-lg) {
+		width : 59rem;
+
+	}
+	@include respond-to(legacy) {
+		width : 61rem;
+	}
+	@include respond-to(laptop) {
+		width : 81.3rem;
+	}
+
+	&.isCMS {
+		@include respond-to(min-md) {
+			width : 45.8rem !important;
+		}
+		@include respond-to(min-lg) {
+			width : 59rem !important;
+
+		}
+		@include respond-to(legacy) {
+			width : 61rem !important;
+		}
+		@include respond-to(laptop) {
+			width : 81.3rem !important;
+		}
+	}
+}
+
+.wk3 {
+	@include respond-to(min-md) {
+		width : 70.2rem;
+	}
+	@include respond-to(min-lg) {
+		width : 90.4rem;
+	}
+	@include respond-to(legacy) {
+		width : 93.5rem;
+	}
+	@include respond-to(laptop) {
+		width : 124.6rem;
+	}
+
+	&.isCMS {
+		@include respond-to(min-md) {
+			width : 70.2rem !important;
+		}
+		@include respond-to(min-lg) {
+			width : 90.4rem !important;
+		}
+		@include respond-to(legacy) {
+			width : 93.5rem !important;
+		}
+		@include respond-to(laptop) {
+			width : 124.6rem !important;
+		}
+	}
+}
+
+.wkElement.infinite {
+	height : auto;
+}
+
+/* wkElements Breakpoint dimensions end*/
+
+.col-laptop-3 {
+	@include respond-to(laptop) {
+		width : 25%;
+	}
+}
+
+.col-laptop-4 {
+	@include respond-to(laptop) {
+		width : 33.33333333%;
+	}
+}
+
+.col-laptop-3,
+.col-laptop-4 {
+	min-height    : 1px;
+	padding-left  : 15px;
+	padding-right : 15px;
+	position      : relative;
+}
+
+.headline {
+	h2 {
+		color       : $primary;
+		font-size   : $font-size--xlarge;
+		font-weight : $font-weight--bold;
+		text-align  : center;
+
+		@include respond-to(min-md) {
+			font-size : $font-size--xxlarge;
+		}
+	}
+}
+
+.backToTopWrapper {
+	bottom  : 1rem;
+	display : none;
+	z-index : 20;
+
+	&:hover {
+		cursor : pointer;
+	}
+
+	@include respond-to(min-md) {
+		background : $white;
+		box-shadow : 0 0 1rem 0.2rem $grey;
+		height     : 5rem;
+		position   : fixed;
+		right      : 0;
+		width      : 5rem;
+		z-index    : 19;
+
+	}
+
+	.backToTop {
+		@include respond-to(min-md) {
+			border        : 0.3rem solid $secondary;
+			border-radius : 50%;
+			color         : $white;
+			height        : 4rem;
+			margin        : 0.5rem;
+			position      : relative;
+			width         : 4rem;
+		}
+
+		&:after {
+			@include respond-to(min-md) {
+				clear       : both;
+				color       : $secondary;
+				content     : $ks-arrow-up;
+				display     : block;
+				font-family : $ks;
+				font-size   : 2rem;
+				padding     : 0.3rem 0.7rem;
+			}
+		}
+	}
+}
+
+.backToStartWrapper {
+	//display: none;
+	margin : 3rem auto 2rem auto;
+	width  : 21.2rem;
+
+	@include respond-to(min-md) {
+		align-items     : center;
+		background      : $white;
+		box-shadow      : 0 0 1rem 0.2rem $grey;
+		display         : inherit;
+		height          : 5rem;
+		justify-content : center;
+		margin          : inherit;
+		position        : fixed;
+		right           : 0;
+		//top             : 22rem;
+		width           : 5rem;
+		z-index         : 19;
+	}
+
+	.backToStart {
+		width : 100%;
+		@include respond-to(min-md) {
+			color    : $white;
+			height   : 4rem;
+			margin   : 1.2rem 1.5rem;
+			position : relative;
+			width    : 4rem;
+		}
+
+		&:after {
+			@include respond-to(min-md) {
+				clear       : both;
+				color       : $secondary;
+				content     : $ks-home;
+				display     : block;
+				font-family : $ks;
+				font-size   : 2rem;
+			}
+		}
+
+		&:focus,
+		&:active {
+			input {
+				background : $secondary;
+				color      : $white;
+			}
+		}
+
+		input {
+			background  : $secondary;
+			border      : 0.1rem solid $secondary;
+			color       : $white;
+			font-size   : 1.4rem;
+			font-weight : 900;
+			width       : 100%;
+
+			@include respond-to(min-md) {
+				display : none;
+			}
+		}
+	}
+}
+
+.ibe__wrapper {
+	margin    : 4rem auto 0 auto;
+	max-width : 1366px;
+	position  : relative;
+	width     : 100%;
+}
+
+.extendedSearch {
+	@include respond-to(laptop) {
+		float : left;
+	}
+}
+
+.extendedPadding {
+	@include respond-to(laptop) {
+		float : right;
+		width : calc(100% - 38rem);
+	}
+}
+
+.toast-title,
+.toast-message {
+	font-size : $font-size--base;
+}
+
+/* IBE Defaults  */
+
+[data-content="ibe"] {
+	position : relative;
+
+	.emptySearch {
+		position : relative;
+
+		p {
+			bottom           : 0rem;
+			color            : $primary--lite;
+			font-size        : $font-size--base;
+			line-height      : 2rem;
+			margin           : 0;
+			padding          : 1rem;
+			position         : absolute;
+			background-color : rgba(255, 255, 255, 0.8);
+
+			@include respond-to(min-lg) {
+				font-size : $font-size--button;
+			}
+
+			.longtext {
+				display : none;
+
+				@include respond-to(min-md) {
+					display : inline;
+				}
+			}
+		}
+
+		&__back {
+			margin     : 3rem 0;
+			text-align : center;
+
+			button {
+				font-size   : $font-size--button;
+				height      : 3.5rem;
+				line-height : 3.5rem;
+			}
+		}
+	}
+}
+
+/* Modalbox */
+
+.dummyModalGallery {
+	display : none;
+}
+
+.modal {
+
+	.modal-header {
+		border   : 0;
+		padding  : 0;
+		position : relative;
+
+		.close {
+			align-items     : center;
+			background      : $white;
+			border          : .1rem solid $secondary;
+			border-radius   : 50%;
+			color           : $secondary;
+			cursor          : pointer;
+			display         : flex;
+			height          : 3.1rem;
+			justify-content : center;
+			opacity         : 1;
+			position        : absolute;
+			right           : -1.4rem;
+			top             : -1.3rem;
+			width           : 3.1rem;
+			z-index         : 1;
+			@include respond-to(min-md) {
+				right : -1.5rem;
+			}
+
+			i {
+				color     : $secondary;
+				font-size : 1.3rem;
+			}
+		}
+	}
+
+	&#galleryPreviewModal {
+
+		.modal-dialog {
+			margin : 0 auto;
+			top    : 3rem;
+			width  : 90%;
+			@include respond-to(min-lg) {
+				height : 90%;
+			}
+
+			.modal-content {
+				background : $grey--lite;
+				height     : 100%;
+				width      : 100%;
+
+				.galleryPreviewModalImage {
+					align-items     : center;
+					display         : flex;
+					height          : 100%;
+					justify-content : center;
+					width           : 100%;
+
+					img {
+						height     : auto;
+						max-height : 100%;
+						max-width  : 100%;
+						width      : auto;
+					}
+				}
+
+				.modal-gallery {
+					height  : 90%;
+					margin  : 2rem auto;
+					padding : 0 0 5rem 0;
+					width   : 90%;
+
+					.galleryFullsizeSlider {
+						margin     : 0;
+						max-height : 100%;
+
+						&__container {
+							position : relative;
+						}
+					}
+
+					ul.slick-dots {
+						margin   : 0;
+						position : relative;
+					}
+
+					.galleryFullsizeSlider__slide--next {
+						background    : rgba(255, 255, 255, 0.71);
+						border-radius : 50%;
+						font-size     : 2.5rem;
+						height        : 4.2rem;
+						padding-left  : .9rem;
+						padding-top   : 0.6rem;
+						right         : -1rem;
+						top           : 50%;
+						width         : 4.2rem;
+						@include respond-to(min-md) {
+							right : -2rem;
+						}
+						@include respond-to(min-lg) {
+							padding-top : 0.8rem;
+						}
+					}
+					.galleryFullsizeSlider__slide--prev {
+						background    : rgba(255, 255, 255, 0.71);
+						border-radius : 50%;
+						font-size     : 2.5rem;
+						height        : 4.2rem;
+						left          : -1rem;
+						padding-left  : .8rem;
+						padding-top   : 0.6rem;
+						top           : 50%;
+						width         : 4.2rem;
+						@include respond-to(min-md) {
+							left : -2rem;
+						}
+						@include respond-to(min-lg) {
+							padding-top : 0.8rem;
+						}
+					}
+
+					figure {
+						align-items     : center;
+						display         : flex;
+						justify-content : center;
+						width           : 100%;
+						@include respond-to(min-lg) {
+							height : 70vh;
+						}
+
+						img {
+							height     : auto;
+							max-height : 100%;
+							max-width  : 100%;
+							width      : auto;
+						}
+
+						&:active,
+						&:focus {
+							outline : 0;
+						}
+					}
+				}
+
+				.modal-imagetitle {
+
+					.imagetitle {
+						font-size  : $font-size--button;
+						min-height : 2.2rem;
+						text-align : center;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* IE11  */
+
+select::-ms-expand {
+	display : none;
+}
+
+/* -------------------------------------------------- Cookienotification */
+
+.cookieDisclaimer {
+	align-items      : center;
+	background-image : $gradient-cookie;
+	border-bottom    : 7px solid $secondary;
+	color            : $primary;
+	cursor           : pointer;
+	display          : flex;
+	justify-content  : center;
+	flex-wrap        : wrap;
+	font-family      : $font-family;
+	font-size        : $font-size--base;
+	min-height       : 5.6rem;
+	overflow         : hidden;
+	padding          : 1rem 3rem;
+	text-align       : center;
+	width            : 100%;
+	@include respond-to(min-md) {
+		border-bottom : 3px solid $secondary;
+		flex-wrap     : nowrap;
+		text-align    : left;
+	}
+
+	&.sticky {
+		position : fixed;
+		top      : 0;
+		z-index  : 2000;
+	}
+
+	p {
+		margin : 1rem 0;
+		@include respond-to(min-md) {
+			margin : 0 1rem 0 0;
+		}
+	}
+
+	a {
+		color           : $primary;
+		display         : inline-block;
+		font-weight     : bold;
+		text-decoration : underline;
+	}
+
+	.cookieClose {
+		background-color : $secondary;
+		border           : none;
+		color            : white;
+		display          : inline-block;
+		height           : 3.5rem;
+		font-weight      : $font-weight--bold;
+		min-width        : 7rem;
+		padding          : .8rem 1rem;
+		text-align       : center;
+	}
+}
+
+/* -------------------------------------------------- Extender */
+
+.extenderClip {
+	background    : $white;
+	border-left   : 0;
+	border-bottom : 1px solid $grey--dark;
+	border-right  : 1px solid $grey--dark;
+	border-top    : 1px solid $grey--dark;
+	border-radius : 0 7px 7px 0;
+	box-shadow    : $box-shadow--extendedSearch;
+	cursor        : pointer;
+	font-size     : 2rem;
+	font-weight   : bold;
+	height        : auto;
+	overflow      : hidden;
+	position      : absolute;
+	transition    : width .3s ease-in-out;
+	top           : 0;
+	width         : 4rem;
+	z-index       : 22;
+
+	/*@media only screen and (orientation : landscape) {
+		top : 55%;
+	}
+
+	@include respond-to(min-md) {
+		@media only screen and (orientation : landscape) {
+			top : 40%;
+		}
+		@media only screen and (orientation : portrait) {
+			top : 20%;
+		}
+	}*/
+
+	&__container {
+		display     : inline-block;
+		overflow    : hidden;
+		padding     : 2rem 0 .5rem 0;
+		width       : 3rem;
+		line-height : 3.5rem;
+	}
+
+	.ks-search-plus {
+		color     : $primary;
+		display   : block;
+		font-size : 2rem;
+		left      : 1rem;
+		position  : relative;
+		top       : -1rem;
+	}
+
+	.extenderText {
+		color            : $grey--xxdark;
+		display          : inline-block;
+		font-size        : 1.8rem;
+		font-weight      : bold;
+		padding          : 0 10px;
+		transform        : translate(0, 100%) rotate(-90deg);
+		transform-origin : 0 0;
+		white-space      : nowrap;
+
+		&:after {
+			content    : "";
+			float      : left;
+			margin-top : calc(100% + 10px);
+		}
+	}
+}

@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
 	entry: ['./src/index.js'],
@@ -16,9 +15,8 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.(css|scss)$/,
+				test: /\.(sa|sc|c)ss$/,
 				use: [
-					devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
 					{
 						loader: 'style-loader',
 						options: {

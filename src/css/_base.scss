@@ -1,0 +1,56 @@
+@import "variables";
+@import "mixins";
+@import "var";
+@import "mediaquery";
+
+/* -------------------------------------------------- Mixins */
+
+// Vertical align anything
+@mixin vertical-align {
+	position          : relative;
+	top               : 50%;
+	-webkit-transform : translateY(-50%);
+	-ms-transform     : translateY(-50%);
+	transform         : translateY(-50%);
+}
+
+// Fluid Font Size by Viewport for Circle
+$max-breakpoint : 1460;
+$wide-screen : "(min-width: #{$max-breakpoint}px)";
+
+@function get-vw($target) {
+	$vw-context : ($max-breakpoint * .01) * 1px; // 1% viewport width
+	@return ($target/$vw-context) * 1vw;
+}
+
+@mixin vw-font($size) {
+	font-size : get-vw($size);
+	// Prevent font-size from getting too big
+	@media #{$wide-screen} {
+		font-size : $size;
+	}
+}
+
+// Calculate Padding for Fit-Content-to-Wrapper
+@mixin padding-ratio($x, $y, $selector: img) {
+	height	: 100%;
+	position: relative;
+	padding	: 0 0 percentage($y/$x) 0;
+
+	#{$selector} {
+		bottom		: 0;
+		height		: auto;
+		left		: 0;
+		margin		: auto;
+		max-height	: 100%;
+		max-width	: 100%;
+		position	: absolute;
+		right		: 0;
+		top			: 0;
+		width		: auto;
+	}
+}
+
+@function unicode($str) {
+	@return unquote("\"") + $str + unquote("\"");
+}
